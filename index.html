@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript" src="swfobject-2.2.min.js"></script>
+<script type="text/javascript" src="event_target.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<!-- <script type="text/javascript" src="swfobject-2.2.js"></script> -->
+<script>
+function save(button) {
+  var textField = document.getElementById("textfield");
+  button.disabled = true;
+  window.lso.set('cookie', textField.value, function() {
+    button.disabled = false;
+  });
+}
+
+window.lso.addEventListener('change', function(event) {
+  var cookie = event.lso['cookie'];
+  if (typeof cookie !== 'undefined')
+    document.getElementById("textfield").value = cookie;
+});
+</script>
+</head>
+<body>
+  Value to store: <input length="20" id="textfield"><input type="submit" onclick="save(this)">
+</body>
+</html>
